@@ -1,16 +1,39 @@
 # Lua API
 
-## Parley.Load
-```lua
-Parley.Load(path_or_string, opts)
+This page shows the main functions you will use. We will keep it friendly and practical.
+
+## Do this first: a complete call
+
+### Dialogue file
+```text
+start:
+System: Hello.
+- End. -> end
 ```
 
-## Parley.Start
+### Lua code
 ```lua
-Parley.Start(player, asset, { entry = "start" })
+local Parley = require("parley/core.lua")
+
+local asset = Parley.Load([[start:
+System: Hello.
+- End. -> end
+]], { is_string = true })
+
+local session_id = Parley.Start(player, asset, { entry = "start" })
 ```
 
-## Parley.Stop
-```lua
-Parley.Stop(player, session_id, reason)
-```
+### What happens in-game
+The player sees one line, then ends the dialogue. You also get a session id.
+
+## Key functions
+- `Parley.Load(path_or_string, opts)`
+- `Parley.Start(player_or_nil, asset_or_id, opts)`
+- `Parley.Stop(player_or_nil, session_id, reason)`
+- `Parley.IsRunning(player_or_nil)`
+- `Parley.RegisterStateProvider(fn)`
+- `Parley.SetTextResolver(fn)`
+- `Parley.SetUIAdapter(adapter)`
+
+## What's next?
+In the next section, we will explore callbacks.

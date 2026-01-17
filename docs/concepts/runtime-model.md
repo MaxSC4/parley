@@ -1,16 +1,33 @@
 # Runtime Model
 
-Parley flows as: parse -> runtime -> UI.
+Parley follows a simple flow: parse, run, display. This keeps the runtime predictable and easy to debug.
 
-## Lifecycle
-1) Parse dialogue.
-2) Start session.
-3) Emit line/choices/end steps.
+## Do this first: a full example
+
+### Dialogue file
+```text
+start:
+System: One line, one step.
+- End. -> end
+```
+
+### Lua code
+```lua
+local Parley = require("parley/core.lua")
+
+local asset = Parley.Load([[start:
+System: One line, one step.
+- End. -> end
+]], { is_string = true })
+
+Parley.Start(player, asset, { entry = "start" })
+```
+
+### What happens in-game
+Parley parses the text into steps, then the runtime emits one step at a time to the UI.
 
 <!-- DIAGRAM: Runtime pipeline -->
 ![Runtime Model](../_assets/images/placeholders/state-provider-diagram.png)
 
-## Example
-```lua
-local step = Engine.Next(session, provider, resolver)
-```
+## What's next?
+In the next section, we will talk about dialogue sessions per player.

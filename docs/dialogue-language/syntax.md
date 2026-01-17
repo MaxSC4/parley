@@ -1,13 +1,32 @@
 # Syntax
 
-Dialogue files are line-based with labels, lines, and choices.
+This page explains how the DSL is laid out. It is line-based and intentionally simple.
 
-## Comments
-Use `#` or `//` at the start of a line.
+## Do this first: syntax in action
 
-## Example
-```
-# This is a comment
+### Dialogue file
+```text
+# A comment line
 start:
-Narrator: Hi.
+System: Hello.
+- End. -> end
 ```
+
+### Lua code
+```lua
+local Parley = require("parley/core.lua")
+
+local asset = Parley.Load([[# A comment line
+start:
+System: Hello.
+- End. -> end
+]], { is_string = true })
+
+Parley.Start(player, asset, { entry = "start" })
+```
+
+### What happens in-game
+Comments are ignored. The player sees the line and ends the dialogue.
+
+## What's next?
+In the next section, we will cover labels and flow control.

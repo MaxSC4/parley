@@ -1,0 +1,9 @@
+start:
+Narrator: Welcome to Parley.
+- Who are you? -> who
+- Goodbye. -> end
+
+who:
+Narrator: Just a guide.
+end
+

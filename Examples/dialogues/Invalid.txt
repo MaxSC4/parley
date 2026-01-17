@@ -1,0 +1,2 @@
+start:
+This line is invalid and should trigger a parser error

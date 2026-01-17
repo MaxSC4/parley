@@ -1,0 +1,8 @@
+start:
+Narrator: Choice block with condition.
+if player.has_key: - Use the key. -> unlock
+- Walk away. -> end
+
+unlock:
+Narrator: The door opens.
+end

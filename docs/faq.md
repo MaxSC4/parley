@@ -1,42 +1,18 @@
 # FAQ
 
-This page answers a few common questions.
+## Is Parley client-side or server-side?
 
-## Do this first: a quick example
+Both. The runtime runs on the server and sends steps to the client UI through remote events.
 
-### Dialogue file
-```text
-start:
-System: Hello.
-- End. -> end
-```
+## Can I run Parley without WebUI?
 
-### Lua code
-```lua
-local Parley = require("parley/core.lua")
+Yes. Provide a custom UI adapter and skip the client bridge entirely.
 
-local asset = Parley.Load([[start:
-System: Hello.
-- End. -> end
-]], { is_string = true })
+## Does Parley support localization?
 
-Parley.Start(player, asset, { entry = "start" })
-```
+Not built-in. You can implement `Parley.SetTextResolver` to route text through your localization system.
 
-### What happens in-game
-The dialogue appears and ends. This is the smallest visible result.
+## Can I parse multiple dialogue files?
 
-## Can I pause a dialogue?
-Yes. Stop the session and store your own state. You can resume later by starting at a different label.
+Yes. Call `Parley.Load` for each file and keep the returned assets (or cache them by id).
 
-## Can I reuse dialogues?
-Yes. Parse once and start multiple sessions.
-
-## Is it multiplayer-safe?
-Yes. Each player has their own session.
-
-## Localization?
-Use a custom text resolver to map keys to localized strings.
-
-## What's next?
-If you want a deeper dive, go back to the Dialogue Language section and explore the pages there.

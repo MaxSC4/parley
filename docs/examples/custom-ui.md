@@ -1,45 +1,29 @@
-# Custom UI Example
+# Example: Custom UI Adapter
 
-This example shows how to replace the default UI with your own adapter.
+This example prints dialogue lines and choices to the server console.
 
-## Do this first: the full example
+`Examples/CustomUIAdapterExample.lua`:
 
-### Dialogue file
-```text
-start:
-System: Hello.
-- End. -> end
-```
-
-### Lua code
 ```lua
 local Parley = require("parley/core.lua")
+local asset = Parley.Load("Packages/parley/Examples/dialogues/Minimal.txt", { cache = true })
 
-local asset = Parley.Load([[start:
-System: Hello.
-- End. -> end
-]], { is_string = true })
-
-local adapter = {
-  show_line = function(player, line)
-    print("LINE: " .. line.text)
-  end,
-  show_choices = function(player, choices)
-    for _, c in ipairs(choices) do
-      print("CHOICE: " .. c.text)
+local custom_adapter = {
+    show_line = function(player, line)
+        print("[Parley Custom UI] " .. (line.speaker or "") .. ": " .. (line.text or ""))
+    end,
+    show_choices = function(player, choices)
+        for _, choice in ipairs(choices) do
+            print("[Choice] " .. choice.text)
+        end
+    end,
+    hide = function(player)
+        print("[Parley Custom UI] Closed")
     end
-  end,
-  hide = function(player)
-    print("HIDE")
-  end
 }
 
-Parley.SetUIAdapter(adapter)
-Parley.Start(player, asset, { entry = "start" })
+Parley.SetUIAdapter(custom_adapter)
 ```
 
-### What happens in-game
-The UI is not shown. Instead, you see text output. This is where you plug your custom UI.
+Run `/customui` in chat to start it (see the example file for the command hook).
 
-## What's next?
-In the next section, we will answer common questions.

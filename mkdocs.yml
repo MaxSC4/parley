@@ -1,0 +1,42 @@
+site_name: Parley
+site_url: https://MaxSC4.github.io/parley/
+repo_url: https://github.com/MaxSC4/parley
+repo_name: MaxSC4/parley
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Installation: installation.md
+  - Concepts: concepts.md
+  - Guides:
+      - First Dialogue: guides/first-dialogue.md
+      - State and Conditions: guides/state-and-conditions.md
+      - Custom UI: guides/custom-ui.md
+  - Reference:
+      - API: reference/api.md
+      - Dialogue Syntax: reference/dialogue-syntax.md
+      - Bridge Events: reference/events.md
+  - Examples:
+      - Minimal Start: examples/minimal.md
+      - Branching: examples/branching.md
+      - Custom UI Adapter: examples/custom-ui.md
+  - FAQ: faq.md
+  - Troubleshooting: troubleshooting.md
+  - Contributing: contributing.md
+  - Changelog: changelog.md
+

@@ -1,51 +1,47 @@
-# Branching Dialogue
+# Example: Branching + Reputation
 
-This example shows how choices branch the conversation.
+This example combines conditions and mutations.
 
-## Do this first: the full example
+## Dialogue script
 
-### Dialogue file
+`Examples/dialogues/Branching.txt`:
+
 ```text
 start:
-System: Choose a branch.
-- Left path. -> left
-- Right path. -> right
+Narrator: Hello, {{player.name}}.
+if player.reputation >= 5: Narrator: People speak highly of you.
+- Ask about the town. -> town
+- Leave. -> end
 
-left:
-System: You chose left.
-end
-
-right:
-System: You chose right.
-end
+town:
+Narrator: The town is quiet these days.
+do reputation += 1
+- Thanks. -> end
 ```
 
-### Lua code
+## State provider
+
+`Examples/StateProviderExample.lua`:
+
 ```lua
-local Parley = require("parley/core.lua")
-
-local asset = Parley.Load([[start:
-System: Choose a branch.
-- Left path. -> left
-- Right path. -> right
-
-left:
-System: You chose left.
-end
-
-right:
-System: You chose right.
-end
-]], { is_string = true })
-
-Parley.Start(player, asset, { entry = "start" })
+Parley.RegisterStateProvider(function(player)
+    return {
+        get = function(_, path)
+            if path == "player.name" then
+                return player:GetName()
+            end
+            if path == "player.reputation" then
+                return player:GetValue("reputation") or 0
+            end
+        end,
+        apply = function(_, action)
+            if action == "reputation += 1" then
+                player:SetValue("reputation", (player:GetValue("reputation") or 0) + 1)
+            end
+        end
+    }
+end)
 ```
 
-### What happens in-game
-The player sees two choices. Each choice leads to a different line.
+Trigger it by running `/branch` in chat (see the example file for the full command hook).
 
-<!-- SCREENSHOT: Dialogue showing multiple choices -->
-![Dialogue Choices](../_assets/images/placeholders/branching-example.png)
-
-## What's next?
-In the next section, we will use state to change the dialogue.

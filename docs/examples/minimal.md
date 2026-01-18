@@ -1,30 +1,42 @@
-# Minimal Dialogue
+# Example: Minimal Start
 
-This is the smallest useful example.
+This is the default demo wired in `Server/Index.lua`.
 
-## Do this first: the complete example
+## Dialogue script
 
-### Dialogue file
+`Examples/dialogues/Minimal.txt`:
+
 ```text
 start:
-System: Hello.
-- End. -> end
+Narrator: Welcome to Parley.
+- Who are you? -> who
+- Goodbye. -> end
+
+who:
+Narrator: Just a guide.
+end
 ```
 
-### Lua code
+## Starter script
+
+`Examples/MinimalStart.lua`:
+
 ```lua
 local Parley = require("parley/core.lua")
 
 local asset = Parley.Load([[start:
-System: Hello.
-- End. -> end
-]], { is_string = true })
+Narrator: Welcome, {{player.name}}.
+...
+]], { is_string = true, cache = true })
 
-Parley.Start(player, asset, { entry = "start" })
+function MinimalStart.StartFor(player)
+    Parley.Start(player, asset, { entry = "start" })
+end
 ```
 
-### What happens in-game
-The player sees one line and ends the dialogue.
+To trigger it, run the server console command:
 
-## What's next?
-In the next section, we will add branching choices.
+```
+parley
+```
+

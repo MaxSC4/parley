@@ -1,0 +1,66 @@
+:root {
+  --nw-blue: #22b3ff;
+  --nw-blue-deep: #0b6bd1;
+  --nw-green: #7eea3a;
+  --nw-lime: #c7ff3d;
+  --nw-ink: #0f1a24;
+  --nw-mist: #eaf7ff;
+}
+
+body {
+  background: radial-gradient(1200px 800px at 10% 0%, #e3f8ff 0%, #f6fbff 40%, #ffffff 100%);
+}
+
+.md-header {
+  background: linear-gradient(120deg, var(--nw-blue-deep), var(--nw-blue));
+}
+
+.md-header__title,
+.md-header__button {
+  color: #ffffff;
+}
+
+.md-nav__title {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.md-content__inner h1 {
+  color: var(--nw-ink);
+}
+
+.md-content__inner h2 {
+  color: var(--nw-blue-deep);
+}
+
+.md-typeset a {
+  color: var(--nw-blue-deep);
+}
+
+.md-typeset a:hover {
+  color: #0a4fa5;
+}
+
+.md-typeset code {
+  border: 1px solid rgba(34, 179, 255, 0.25);
+  background: rgba(34, 179, 255, 0.08);
+}
+
+.md-button {
+  border-radius: 999px;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-left: 4px solid var(--nw-blue);
+  background: var(--nw-mist);
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  background: rgba(34, 179, 255, 0.12);
+}
+
+.md-footer {
+  background: linear-gradient(120deg, #0b1b2a, #0f2b3b);
+}

@@ -5,9 +5,15 @@ repo_name: MaxSC4/parley
 
 theme:
   name: material
+  logo: assets/branding/logo.png
+  favicon: assets/branding/logo.png
   features:
     - navigation.sections
     - content.code.copy
+  palette:
+    - scheme: default
+      primary: teal
+      accent: lime
 
 markdown_extensions:
   - admonition
@@ -39,3 +45,6 @@ nav:
   - Troubleshooting: troubleshooting.md
   - Contributing: contributing.md
   - Changelog: changelog.md
+
+extra_css:
+  - assets/stylesheets/extra.css

@@ -4,7 +4,7 @@ Parley is a lightweight dialogue system for nanos world packages. It loads simpl
 
 This project is inspired by the Godot Dialogue Manager (GDM): https://github.com/nathanhoad/godot_dialogue_manager
 
-Documentation: https://maxsc4.github.io/nanos/parley/
+Documentation: https://maxsc4.github.io/parley/
 
 ## Quickstart (5 minutes)
 

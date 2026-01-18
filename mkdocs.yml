@@ -1,5 +1,5 @@
 site_name: Parley
-site_url: https://MaxSC4.github.io/parley/
+site_url: https://maxsc4.github.io/nanos/parley/
 repo_url: https://github.com/MaxSC4/parley
 repo_name: MaxSC4/parley
 
@@ -39,4 +39,3 @@ nav:
   - Troubleshooting: troubleshooting.md
   - Contributing: contributing.md
   - Changelog: changelog.md
-

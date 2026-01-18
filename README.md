@@ -4,7 +4,7 @@ Parley is a lightweight dialogue system for nanos world packages. It loads simpl
 
 This project is inspired by the Godot Dialogue Manager (GDM): https://github.com/nathanhoad/godot_dialogue_manager
 
-Documentation: https://MaxSC4.github.io/parley/
+Documentation: https://maxsc4.github.io/nanos/parley/
 
 ## Quickstart (5 minutes)
 
@@ -32,4 +32,3 @@ parley
 This opens the default WebUI dialogue for all connected players.
 
 For the full walkthrough and more examples, see the docs site.
-

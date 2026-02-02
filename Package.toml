@@ -1,7 +1,7 @@
 # vault configurations
 [meta]
     # friendly name
-    title =                 "Parley"
+    title =                 "parley"
     # contributors
     author =                "Loniix"
     # version
@@ -19,7 +19,7 @@
     compatibility_version = "1.69"
     # packages requirements
     packages_requirements = [
-                            
+                            "classlib",
     ]
     # asset packs requirements
     assets_requirements = [

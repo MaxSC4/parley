@@ -1,5 +1,6 @@
 local Tokenizer = require("parley/parser/tokenizer.lua")
 local Errors = require("parley/parser/errors.lua")
+local Asset = require("parley/model/asset.lua")
 
 local Parser = {}
 
@@ -53,19 +54,11 @@ end
 function Parser.Parse(text, opts)
     opts = opts or {}
     local lines = Tokenizer.Lines(text)
-    local asset = {
-        id = opts.id,
-        file = opts.file,
-        labels = {},
-        order = {}
-    }
+    local asset = Asset.New({ id = opts.id, file = opts.file })
 
     local current_label = nil
     local function ensure_label(label)
-        if not asset.labels[label] then
-            asset.labels[label] = { steps = {} }
-            table.insert(asset.order, label)
-        end
+        asset:EnsureLabel(label)
     end
 
     local function push_step(step, line_num, raw)
@@ -75,7 +68,7 @@ function Parser.Parse(text, opts)
         end
         step._line = line_num
         step._raw = raw
-        table.insert(asset.labels[current_label].steps, step)
+        asset:AddStep(current_label, step)
     end
 
     for _, entry in ipairs(lines) do
@@ -137,8 +130,3 @@ function Parser.Parse(text, opts)
 end
 
 return Parser
-
-
-
-
-

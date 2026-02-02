@@ -1,8 +1,16 @@
+local Class = require("parley/util/class.lua")
+local BaseClass = Class.BaseClass
+local ClassLib = Class.ClassLib
+
 local Steps = require("parley/runtime/steps.lua")
 local Expr = require("parley/util/expr.lua")
 local Log = require("parley/util/log.lua")
 
-local Engine = {}
+local class_name = "ParleyEngine"
+local Engine = (ClassLib and ClassLib.GetClassByName and ClassLib.GetClassByName(class_name)) or nil
+if not Engine then
+    Engine = BaseClass.Inherit(class_name)
+end
 
 local function resolve_path(provider, ctx, path)
     if provider and provider.get then
@@ -11,7 +19,7 @@ local function resolve_path(provider, ctx, path)
     return nil
 end
 
-function Engine.DefaultResolveText(provider, ctx, template)
+function Engine:DefaultResolveText(provider, ctx, template)
     local function repl(key)
         local val = resolve_path(provider, ctx, key)
         if val == nil then
@@ -59,7 +67,7 @@ local function next_step(session)
     return step
 end
 
-function Engine.Choose(session, choice_id)
+function Engine:Choose(session, choice_id)
     local choices = session.waiting_choices
     session.waiting_choices = nil
     if not choices then
@@ -80,7 +88,7 @@ function Engine.Choose(session, choice_id)
     return choice
 end
 
-function Engine.Next(session, provider, resolver)
+function Engine:Next(session, provider, resolver)
     local ctx = session.opts and session.opts.context or {}
 
     local function context_error(msg, step)
@@ -162,7 +170,7 @@ function Engine.Next(session, provider, resolver)
                         context_error(c, step)
                     end
                     if c then
-                        table.insert(filtered, choice)
+                        filtered[#filtered + 1] = choice
                     end
                 end
                 if #filtered > 0 then
@@ -186,7 +194,7 @@ function Engine.Next(session, provider, resolver)
     end
 end
 
-function Engine.DispatchStep(adapter, session, step)
+function Engine:DispatchStep(adapter, session, step)
     local player = session.player
     if step.type == "line" and adapter.show_line then
         adapter.show_line(player, step, session)
@@ -208,8 +216,24 @@ function Engine.DispatchStep(adapter, session, step)
     end
 end
 
+function Engine.DefaultResolveText(provider, ctx, template)
+    local inst = Engine()
+    return inst:DefaultResolveText(provider, ctx, template)
+end
+
+function Engine.Next(session, provider, resolver)
+    local inst = Engine()
+    return inst:Next(session, provider, resolver)
+end
+
+function Engine.Choose(session, choice_id)
+    local inst = Engine()
+    return inst:Choose(session, choice_id)
+end
+
+function Engine.DispatchStep(adapter, session, step)
+    local inst = Engine()
+    return inst:DispatchStep(adapter, session, step)
+end
+
 return Engine
-
-
-
-
